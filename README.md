@@ -1,9 +1,9 @@
 # CONUHACK_2K18
 
-# Description
+### Description
 Android application
 
-# Contributors
+### Contributors
 | Name      |Github |
 | ------------- |:-------------:|
 | Andy Pham     | andypham29 |
