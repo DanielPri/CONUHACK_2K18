@@ -21,10 +21,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
     View textNluButton = null;
     View ttsButton = null;
 
-    View audioButton = null;
-
     View configButton = null;
     View aboutButton = null;
+
+    View audioButton = null;
 
 //    View btn_listen = null;
     View btn_speak = null;
@@ -72,6 +72,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
 
         Intent intent = null;
+
         if(v == asrButton) {
             intent = new Intent(this, ASRActivity.class);
         } else if(v == nluButton) {
@@ -82,16 +83,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
             intent = new Intent(this, TTSActivity.class);
         } else if(v == audioButton) {
             intent = new Intent(this, AudioActivity.class);
-        } else if(v == configButton) {
-            intent = new Intent(this, ConfigActivity.class);
-        } else if(v == aboutButton) {
-            intent = new Intent(this, AboutActivity.class);
         }else if(v == btn_speak) {
             intent = new Intent(this,SLTActivity.class);
         }else if(v == btn2) {
             intent = new Intent(this,Main2Activity.class);
         }else if(v == btn3) {
             intent = new Intent(this,Main3Activity.class);
+        } else if(v == configButton) {
+            intent = new Intent(this, ConfigActivity.class);
+        } else if(v == aboutButton) {
+            intent = new Intent(this, AboutActivity.class);
         }
 
         if(intent != null) {
@@ -126,13 +127,40 @@ public class MainActivity extends Activity implements View.OnClickListener {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.config:
-                onClick(btn2);
+                onClickConfig(configButton);
                 return true;
             case R.id.about:
-                onClick(btn3);
+                onClickAbout(aboutButton);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void onClickConfig(View v){
+        Intent intent = null;
+
+        if(v == configButton) {
+            intent = new Intent(this, ConfigActivity.class);
+        }
+
+
+        if(intent != null) {
+            startActivity(intent);
+            overridePendingTransition(R.anim.enter_left, R.anim.exit_left);
+        }
+    }
+    public void onClickAbout(View v){
+        Intent intent = null;
+
+        if(v == aboutButton) {
+            intent = new Intent(this, AboutActivity.class);
+        }
+
+
+        if(intent != null) {
+            startActivity(intent);
+            overridePendingTransition(R.anim.enter_left, R.anim.exit_left);
         }
     }
 
