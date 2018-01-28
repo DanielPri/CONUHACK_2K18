@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ import com.nuance.speechkitsample.TTSCall;
  */
 public class GameUI extends AudioActivity implements View.OnClickListener {
 
+
     private Audio startEarcon;
     private Audio stopEarcon;
     private Audio errorEarcon;
@@ -75,6 +77,9 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_ui);
 
+        ImageView img = (ImageView) findViewById(R.id.imageView);
+
+
         ttsCall = new TTSCall(this);
 
         detectionType = (RadioGroup)findViewById(R.id.detection_type_picker );
@@ -103,7 +108,9 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
         loadEarcons();
 
         setState(State.IDLE);
-        narratorText.setText("Welcome adventurer to the woods. You are in a forest, with climbable trees, a path set before you and you notice claw marks on a nearby tree\nWhat do you do?\n");
+        narratorText.setText("Welcome adventurer. You are tasked with taking down the Werewolf that was terrorizing our village." +
+                "He was last seen going into the woods...\nAs you enter the forest, you notice claw marks on a " +
+                "tree, and nearby grows a tree that seems easy to climb. Down the center, a path goes deeper into the woods.\nWhat do you do?\n");
         yourLocation.setText("Location: Forest");
         ttsCall.talk(narratorText.getText().toString());
     }
@@ -234,45 +241,85 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
                 case FOREST:
                     //if the choice is to climb tree
                     if(intent.equals("climbTreeUp")){
-                        narratorText.setText("You climb up the tree");
+                        narratorText.setText("You climb up the tree, and you see a clear sky with a full moon." +
+                                "You hear a howl further into the woods.\nWhat do you do?");
                         current = finiteState.TREE_TOP;
                         yourLocation.setText("Location: Tree-Top");
                         ttsCall.talk(narratorText.getText().toString());
                     }
                     else if(intent.equals("examineClaws")){
-                        narratorText.setText("You examine the claws");
+                        narratorText.setText("You examine the claw marks. They are large and cut deeply into the woods " +
+                                "Clearly caused by a monster of some sort.");
                         ttsCall.talk(narratorText.getText().toString());
                     }
                     else if(intent.equals("lookAtTree")){
-                        narratorText.setText("What tree do you look at???");
+                        narratorText.setText("All trees look the same, save the one with claw marks");
                         ttsCall.talk(narratorText.getText().toString());
                     }
                     else if(intent.equals("goPath")){
-                        narratorText.setText("You go down the path");
+                        narratorText.setText("You go down the path. You are now deeper in the woods. You see a path covered in tracks" +
+                                " and a large hole in a tree, at about chest height.\nWhat do you do?");
+                        current = finiteState.FOREST_DEEPER;
+                        yourLocation.setText("Location: Deep Forest");
                         ttsCall.talk(narratorText.getText().toString());
                     }
                     else {
-                        narratorText.setText("What are you saying dummy");
+                        narratorText.setText("You either cannot do that, or are an idiot");
                         ttsCall.talk(narratorText.getText().toString());
                     }
 
                     break;
                 case TREE_TOP:
                     if(intent.equals("jumpFromTree")){
-                        narratorText.setText("You cannot jump from this height, you fool!");
+                        narratorText.setText("You cannot jump from this height, you risk death!");
                         ttsCall.talk(narratorText.getText().toString());
                     }
                     else if(intent.equals("climbTreeDown")){
-                        narratorText.setText("You go back down.");
+                        narratorText.setText("You go back down. You are now once again in the forest.\nWhat do you do?");
                         current = finiteState.FOREST;
                         yourLocation.setText("Location: Forest");
                         ttsCall.talk(narratorText.getText().toString());
                     }
                     else {
-                        narratorText.setText("What are you saying dumbo");
+                        narratorText.setText("I can't understand you up there in the trees sometimes.");
                         ttsCall.talk(narratorText.getText().toString());
                     }
                     break;
+                case FOREST_DEEPER:
+                    if(intent.equals("tracksPath")){
+                        narratorText.setText("You follow the tracks ever deeper into the darkness of the forest. You see that" +
+                                " the footprints are both human and animal.");
+                        current = finiteState.FOREST_FINAL;
+                        yourLocation.setText("Location: Complete Wilderness");
+                        ttsCall.talk(narratorText.getText().toString());
+                    }
+                    else if(intent.equals("holeInTree")){
+                        narratorText.setText("You notice a harmless and cute squirrel in the tree.");
+                        ttsCall.talk(narratorText.getText().toString());
+                    }
+                    else {
+                        narratorText.setText("You either cannot do that, or I do not understand you.");
+                        ttsCall.talk(narratorText.getText().toString());
+                    }
+                case FOREST_FINAL:
+                    if(intent.equals("examineBones")){
+                        narratorText.setText("The bones seem fresh and licked clean.");
+                        ttsCall.talk(narratorText.getText().toString());
+                    }
+                    else if(intent.equals("examineBlood")){
+                        narratorText.setText("The blood is fresh and still warm. An ominous vapor rises from it on this cold night");
+                        ttsCall.talk(narratorText.getText().toString());
+                    }
+                    else if(intent.equals("goPath") && current == finiteState.FOREST_FINAL){
+                        narratorText.setText("You encounter the werewolf. In an extremely anticlimatic battle, you win.");
+                        current = finiteState.VICTORY;
+                        yourLocation.setText("Location: VICTORY");
+                        ttsCall.talk(narratorText.getText().toString());
+                    }
+                    else {
+                        narratorText.setText("You either cannot do that, or I do not understand you.");
+                        ttsCall.talk(narratorText.getText().toString());
+                    }
             }
 
         }
@@ -357,6 +404,10 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
         super.onFinishedPlaying(audioPlayer, audio);
 
         ttsCall.onFinishedPlaying();
+        if(current == finiteState.VICTORY){
+            finishActivity(0);
+
+        }
     }
 
     private enum State {
@@ -366,7 +417,10 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
     }
     private enum finiteState {
         FOREST,
-        TREE_TOP
+        TREE_TOP,
+        FOREST_DEEPER,
+        FOREST_FINAL,
+        VICTORY
     }
 
     /**
