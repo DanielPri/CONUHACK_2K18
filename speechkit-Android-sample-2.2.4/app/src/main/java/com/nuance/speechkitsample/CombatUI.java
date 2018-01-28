@@ -44,6 +44,9 @@ public class CombatUI extends DetailActivity {
 
                         public void onClick(View v) {
                             progressStatus+=20;
+                            if(progressStatus > 100){
+                                progressStatus = 100;
+                            }
                         }
                     });
 
