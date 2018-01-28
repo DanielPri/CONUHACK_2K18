@@ -5,21 +5,52 @@
     android:background="@android:color/white"
     tools:context="sample.nuance.com.speechkitsample.GameUI">
 
-
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="290dp">
 
     <TextView
         android:id="@+id/narratorBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:text="Game Interface"/>
+        android:layout_marginTop="10dp"
+        android:text="Game Interface" />
 
-    <ImageView
-        android:id="@+id/game_img"
+    <TextView
+        android:id="@+id/replyBox"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detection_type_label"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="58dp" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:scaleX="1.6"
+            android:scaleY="1.6"
+            android:padding="5dp"
+            android:src="@drawable/img_claw" />
+
+        <TextView
+        android:id="@+id/yourLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/clear_logs"
+        android:layout_alignRight="@+id/clear_logs"
+        android:layout_alignTop="@+id/narratorBox"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
+        android:text="Your Location" />
+
+
+
+
+</LinearLayout>
 
 
 
@@ -84,14 +115,10 @@
 
     <Button
         android:id="@+id/toggle_reco"
-        android:layout_above="@+id/toggle"
+        android:layout_above="@+id/footer"
         android:text="@string/recognize"
         style="@style/ActionButton"/>
-    <Button
-        android:id="@+id/toggle"
-        android:layout_above="@+id/footer"
-        android:text="confirm"
-        style="@style/ActionButton"/>
+
 
     <FrameLayout
         android:id="@+id/footer"
@@ -101,24 +128,7 @@
         <include layout="@layout/footer"/>
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/replyBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/detection_type_label"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="58dp" />
 
-    <TextView
-        android:id="@+id/yourLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/clear_logs"
-        android:layout_alignRight="@+id/clear_logs"
-        android:layout_alignTop="@+id/narratorBox"
-        android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
-        android:text="Your Location" />
 
 
 </RelativeLayout>
