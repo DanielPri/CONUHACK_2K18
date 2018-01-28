@@ -3,6 +3,8 @@ package com.nuance.speechkitsample;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,7 +26,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     View configButton = null;
     View aboutButton = null;
 
-    View btn_listen = null;
+//    View btn_listen = null;
     View btn_speak = null;
     View btn2 = null;
     View btn3 = null;
@@ -55,10 +57,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 //
 //        audioButton = inflateRowView("Audio Playback", "Loading and playing a resource", utils);
 
-        LinearLayout misc = inflateCategoryView("MISCELLANEOUS", mainContent);
+//        LinearLayout misc = inflateCategoryView("MISCELLANEOUS", mainContent);
 
-        configButton = inflateRowView("Configuration", "Host URL, App ID, etc", misc);
-        aboutButton = inflateRowView("About", "Learn more about SpeechKit", misc);
+//        configButton = inflateRowView("Configuration", "Host URL, App ID, etc", misc);
+//        aboutButton = inflateRowView("About", "Learn more about SpeechKit", misc);
 
     }
 
@@ -109,4 +111,25 @@ public class MainActivity extends Activity implements View.OnClickListener {
         v.setOnClickListener(this);
         return v;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.config:
+                onClick(configButton);
+                return true;
+            case R.id.about:
+                onClick(btn2);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }
