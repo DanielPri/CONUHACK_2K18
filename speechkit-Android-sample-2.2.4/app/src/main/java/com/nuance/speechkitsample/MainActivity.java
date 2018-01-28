@@ -42,10 +42,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         LinearLayout conu = inflateCategoryView("CONUHACKS 3", mainContent);
 
-        btn_speak = inflateRowView("Speak", "Cloud based ASR", conu);
+        btn_speak = inflateRowView("Speaking", "Cloud based ASR", conu);
         btn_startgame = inflateRowView("Start Game", "Cloud based ASR with NLU", conu);
-        btn2 = inflateRowView("2", "Cloud based ASR", conu);
-        btn3 = inflateRowView("3", "Cloud based ASR", conu);
+        btn2 = inflateRowView("Main Menu", "Cloud based ASR", conu);
+        btn3 = inflateRowView("Combat", "Cloud based ASR", conu);
 
 
         LinearLayout coreTech = inflateCategoryView("CORE TECHNOLOGIES", mainContent);
@@ -90,7 +90,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }else if(v == btn2) {
             intent = new Intent(this,MainMenu.class);
         }else if(v == btn3) {
-            intent = new Intent(this,Main3Activity.class);
+            intent = new Intent(this,CombatUI.class);
         } else if(v == btn_startgame) {
             intent = new Intent(this, GameUI.class);
         }
@@ -115,53 +115,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         parent.addView(v);
         v.setOnClickListener(this);
         return v;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.config:
-                onClickConfig(configButton);
-                return true;
-            case R.id.about:
-                onClickAbout(aboutButton);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    public void onClickConfig(View v){
-        Intent intent = null;
-
-        if(v == configButton) {
-            intent = new Intent(this, ConfigActivity.class);
-        }
-
-
-        if(intent != null) {
-            startActivity(intent);
-            overridePendingTransition(R.anim.enter_left, R.anim.exit_left);
-        }
-    }
-    public void onClickAbout(View v){
-        Intent intent = null;
-
-        if(v == aboutButton) {
-            intent = new Intent(this, AboutActivity.class);
-        }
-
-
-        if(intent != null) {
-            startActivity(intent);
-            overridePendingTransition(R.anim.enter_left, R.anim.exit_left);
-        }
     }
 
 }
