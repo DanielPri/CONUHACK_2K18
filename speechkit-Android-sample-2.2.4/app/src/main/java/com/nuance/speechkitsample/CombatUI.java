@@ -39,7 +39,7 @@ public class CombatUI extends DetailActivity {
                     attack.setOnClickListener(new View.OnClickListener() {
 
                         public void onClick(View v) {
-                            progressStatus++;
+                            progressStatus+=20;
                         }
                     });
 
