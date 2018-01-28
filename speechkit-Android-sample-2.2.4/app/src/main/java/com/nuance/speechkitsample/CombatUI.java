@@ -5,47 +5,51 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
-public class CombatUI extends DetailActivity implements View.OnClickListener {
+public class CombatUI extends DetailActivity {
 
-    int maxValue = 90;
-    int progressValue = 5;
+    private ProgressBar progressBar;
+    private int progressStatus = 0;
+    private TextView textView;
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_combat);
 
-        init();
+        Button attack = (Button) findViewById(R.id.attack);
 
-        final Button attack = (Button) findViewById(R.id.attack);
-
-        attack.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                getProgress();
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        textView = (TextView) findViewById(R.id.textView);
+        // Start long running operation in a background thread
+        new Thread(new Runnable() {
+            public void run() {
+                while (progressStatus < 100) {
+                    progressStatus += 1;
+                    // Update the progress bar and display the
+                    //current value in the text view
+                    handler.post(new Runnable() {
+                        public void run() {
+                            progressBar.setProgress(progressStatus);
+//                            textView.setText(progressStatus+"/"+progressBar.getMax());
+                        }
+                    });
+                    try {
+                        // Sleep for 200 milliseconds.
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-        });
+        }).start();
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public void init(){
-        ProgressBar simpleProgressBar=(ProgressBar) findViewById(R.id.progressbar); // initiate the progress bar
-        simpleProgressBar.setRotation(180);
-        maxValue=simpleProgressBar.getMax(); // get maximum value of the progress bar
-
-    }
-
-    public void getProgress(){
-        ProgressBar simpleProgressBar=(ProgressBar)findViewById(R.id.progressbar); // initiate the progress bar
-        progressValue=simpleProgressBar.getProgress();
-    }
 
 }
