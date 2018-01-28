@@ -52,6 +52,9 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
 //    private EditText language;
 
     private TextView logs;
+    private TextView narratorText;
+    private TextView replyBox;
+    private TextView yourLocation;
     private Button clearLogs;
 
     private Button toggleReco;
@@ -61,8 +64,10 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
     private Session speechSession;
     private Transaction recoTransaction;
     private State state = State.IDLE;
+    private finiteState current = finiteState.FOREST;
 
-
+    private String literal = "";
+    private String intent = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +87,10 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
         toggleReco = (Button)findViewById(R.id.toggle_reco);
         toggleReco.setOnClickListener(this);
 
+        narratorText = (TextView)findViewById(R.id.narratorBox);
+        replyBox  = (TextView)findViewById(R.id.replyBox);
+        yourLocation = (TextView)findViewById(R.id.yourLocation);
+
         volumeBar = (ProgressBar)findViewById(R.id.volume_bar);
 
         //Create a session
@@ -90,6 +99,8 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
         loadEarcons();
 
         setState(State.IDLE);
+        narratorText.setText("Welcome adventurer to the woods. You are in a forest, with climbable trees, a path set before you and you notice claw marks on a nearby tree\nWhat do you do?\n");
+        yourLocation.setText("Location: Forest");
     }
 
     // Another activity comes into the foreground. Let's release the server resources if in used.
@@ -199,16 +210,60 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
         @Override
         public void onInterpretation(Transaction transaction, Interpretation interpretation) {
             try {
-                logs.append("\nonInterpretation: " + interpretation.getResult().toString(2));
-                String intent = interpretation.getResult().getJSONArray("interpretations").getJSONObject(0).getJSONObject("action").getJSONObject("intent").optString("value");
-
-                logs.append(intent);
+                //logs.append("\nonInterpretation: " + interpretation.getResult().toString(2));
+                intent = interpretation.getResult().getJSONArray("interpretations").getJSONObject(0).getJSONObject("action").getJSONObject("intent").optString("value");
+                literal = interpretation.getResult().getJSONArray("interpretations").getJSONObject(0).getString("literal");
+                logs.append("\n" + intent + "\n" + literal);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            replyBox.setText(literal);
+            manageState();
+
 
             // We have received a service response. In this case it is our NLU result.
             // Note: this will only happen if you are doing NLU (or using a service)
+        }
+
+        //manages the state
+        private void manageState(){
+            switch (current) {
+                case FOREST:
+                    //if the choice is to climb tree
+                    if(intent.equals("climbTreeUp")){
+                        narratorText.setText("You climb up the tree");
+                        current = finiteState.TREE_TOP;
+                        yourLocation.setText("Location: Tree-Top");
+                    }
+                    else if(intent.equals("examineClaws")){
+                        narratorText.setText("You examine the claws");
+                    }
+                    else if(intent.equals("lookAtTree")){
+                        narratorText.setText("What tree do you look at???");
+                    }
+                    else if(intent.equals("goPath")){
+                        narratorText.setText("You go down the path");
+                    }
+                    else {
+                        narratorText.setText("What are you saying dumbo");
+                    }
+
+                    break;
+                case TREE_TOP:
+                    if(intent.equals("jumpFromTree")){
+                        narratorText.setText("You cannot jump from this height, you fool!");
+                    }
+                    else if(intent.equals("climbTreeDown")){
+                        narratorText.setText("You go back down.");
+                        current = finiteState.FOREST;
+                        yourLocation.setText("Location: Forest");
+                    }
+                    else {
+                        narratorText.setText("What are you saying dumbo");
+                    }
+                    break;
+            }
+
         }
 
         @Override
@@ -283,6 +338,10 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
         IDLE,
         LISTENING,
         PROCESSING
+    }
+    private enum finiteState {
+        FOREST,
+        TREE_TOP
     }
 
     /**
