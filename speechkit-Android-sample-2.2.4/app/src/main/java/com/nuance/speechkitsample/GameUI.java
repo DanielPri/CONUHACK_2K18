@@ -72,6 +72,7 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_ui);
+        TTSCall narrator = new TTSCall();
 
         detectionType = (RadioGroup)findViewById(R.id.detection_type_picker );
 //        nluContextTag = (EditText)findViewById(R.id.nlu_context_tag);
@@ -101,6 +102,7 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
         setState(State.IDLE);
         narratorText.setText("Welcome adventurer to the woods. You are in a forest, with climbable trees, a path set before you and you notice claw marks on a nearby tree\nWhat do you do?\n");
         yourLocation.setText("Location: Forest");
+        narrator.talk(narratorText.getText().toString());
     }
 
     // Another activity comes into the foreground. Let's release the server resources if in used.
