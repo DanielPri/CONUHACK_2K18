@@ -5,75 +5,78 @@
     android:background="@android:color/white"
     tools:context="sample.nuance.com.speechkitsample.GameUI">
 
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="290dp">
-
-    <TextView
-        android:id="@+id/narratorBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="10dp"
-        android:text="Game Interface" />
-
-    <TextView
-        android:id="@+id/replyBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/detection_type_label"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="58dp" />
-
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="bottom"
-            android:layout_weight="1"
-            android:scaleX="1.6"
-            android:scaleY="1.6"
-            android:padding="5dp"
-            android:src="@drawable/img_claw" />
-
-        <TextView
-        android:id="@+id/yourLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/clear_logs"
-        android:layout_alignRight="@+id/clear_logs"
-        android:layout_alignTop="@+id/narratorBox"
-        android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
-        android:text="Your Location" />
-
-
-
-
-</LinearLayout>
-
-
-
-    <ScrollView
-        android:id="@+id/logs_container"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_below="@+id/language_container"
-        android:layout_above="@+id/toggle_reco"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/logs_background">
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/volume_bar">
+
 
         <TextView
-            android:id="@+id/logs"
-            android:layout_width="match_parent"
+            android:id="@+id/narratorBox"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="50dp"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:background="@android:color/transparent"/>
+            android:text="Game Interface"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"/>
 
-    </ScrollView>
+        <TextView
+            android:id="@+id/replyBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="170dp"
+            android:layout_marginLeft="30dp"
+            />
+
+
+        <TextView
+            android:id="@+id/yourLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="220dp"
+            android:layout_marginLeft="30dp"
+            android:text="Your Location" />
+
+
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="84dp"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:src="@drawable/img_claw" />
+
+
+
+    <!--<ScrollView-->
+        <!--android:id="@+id/logs_container"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="150dp"-->
+        <!--android:layout_below="@+id/language_container"-->
+        <!--android:layout_above="@+id/toggle_reco"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:background="@drawable/logs_background">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/logs"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:paddingBottom="50dp"-->
+            <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
+            <!--android:paddingRight="@dimen/activity_horizontal_margin"-->
+            <!--android:background="@android:color/transparent"/>-->
+
+    <!--</ScrollView>-->
 
     <ProgressBar
         android:id="@+id/volume_bar"
@@ -88,35 +91,35 @@
 
 
 
-    <TextView
-        android:id="@+id/logs_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/logs_container"
-        android:layout_alignLeft="@+id/logs_container"
-        android:layout_alignStart="@+id/logs_container"
-        android:layout_margin="15dp"
-        android:text="@string/logs_label"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#D1D1D1"/>
+    <!--<TextView-->
+        <!--android:id="@+id/logs_label"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignBottom="@+id/logs_container"-->
+        <!--android:layout_alignLeft="@+id/logs_container"-->
+        <!--android:layout_alignStart="@+id/logs_container"-->
+        <!--android:layout_margin="15dp"-->
+        <!--android:text="@string/logs_label"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:textColor="#D1D1D1"/>-->
 
-    <Button
-        android:id="@+id/clear_logs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/logs_container"
-        android:layout_alignRight="@+id/logs_container"
-        android:layout_alignEnd="@+id/logs_container"
-        android:layout_margin="5dp"
-        android:text="@string/clear_logs_label"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#2E85FF"
-        style="?android:attr/borderlessButtonStyle"/>
+    <!--<Button-->
+        <!--android:id="@+id/clear_logs"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignBottom="@+id/logs_container"-->
+        <!--android:layout_alignRight="@+id/logs_container"-->
+        <!--android:layout_alignEnd="@+id/logs_container"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:text="@string/clear_logs_label"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:textColor="#2E85FF"-->
+        <!--style="?android:attr/borderlessButtonStyle"/>-->
 
     <Button
         android:id="@+id/toggle_reco"
         android:layout_above="@+id/footer"
-        android:text="@string/recognize"
+        android:text="Listening"
         style="@style/ActionButton"/>
 
 
