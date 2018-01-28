@@ -36,6 +36,10 @@ public class CombatUI extends DetailActivity {
             public void run() {
                 while (progressStatus < 100) {
                     Button attack = (Button) findViewById(R.id.attack);
+                    if(progressStatus <= 100){
+                        progressStatus--;
+                    }
+
                     attack.setOnClickListener(new View.OnClickListener() {
 
                         public void onClick(View v) {
