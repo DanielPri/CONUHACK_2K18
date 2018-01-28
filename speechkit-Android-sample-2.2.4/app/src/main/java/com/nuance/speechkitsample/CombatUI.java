@@ -26,8 +26,12 @@ public class CombatUI extends DetailActivity {
         Button attack = (Button) findViewById(R.id.attack);
 
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            progressBar.setRotation(180);
+        }
         textView = (TextView) findViewById(R.id.textView);
         // Start long running operation in a background thread
+
         new Thread(new Runnable() {
             public void run() {
                 while (progressStatus < 100) {

@@ -51,11 +51,11 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
     private EditText nluContextTag;
 //    private EditText language;
 
-    private TextView logs;
+//    private TextView logs;
     private TextView narratorText;
     private TextView replyBox;
     private TextView yourLocation;
-    private Button clearLogs;
+//    private Button clearLogs;
 
     private Button toggleReco;
 
@@ -84,9 +84,9 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
 //        language = (EditText)findViewById(R.id.language);
 //        language.setText(Configuration.LANGUAGE_CODE);
 
-        logs = (TextView)findViewById(R.id.logs);
-        clearLogs = (Button)findViewById(R.id.clear_logs);
-        clearLogs.setOnClickListener(this);
+//       logs = (TextView)findViewById(R.id.logs);
+//        clearLogs = (Button)findViewById(R.id.clear_logs);
+//        clearLogs.setOnClickListener(this);
 
         toggleReco = (Button)findViewById(R.id.toggle_reco);
         toggleReco.setOnClickListener(this);
@@ -132,9 +132,7 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(v == clearLogs) {
-            logs.setText("");
-        } else if(v == toggleReco) {
+        if(v == toggleReco) {
             toggleReco();
         }
     }
@@ -174,7 +172,7 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
     private Transaction.Listener recoListener = new Transaction.Listener() {
         @Override
         public void onStartedRecording(Transaction transaction) {
-            logs.append("\nonStartedRecording");
+//            logs.append("\nonStartedRecording");
 
             //We have started recording the users voice.
             //We should update our state and start polling their volume.
@@ -184,7 +182,7 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
 
         @Override
         public void onFinishedRecording(Transaction transaction) {
-            logs.append("\nonFinishedRecording");
+//            logs.append("\nonFinishedRecording");
 
             //We have finished recording the users voice.
             //We should update our state and stop polling their volume.
@@ -194,12 +192,12 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
 
         @Override
         public void onServiceResponse(Transaction transaction, org.json.JSONObject response) {
-            try {
-                // 2 spaces for tabulations.
-                logs.append("\nonServiceResponse: " + response.toString(2));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                // 2 spaces for tabulations.
+////                logs.append("\nonServiceResponse: " + response.toString(2));
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
 
             // We have received a service response. In this case it is our NLU result.
             // Note: this will only happen if you are doing NLU (or using a service)
@@ -207,7 +205,7 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
 
         @Override
         public void onRecognition(Transaction transaction, Recognition recognition) {
-            logs.append("\nonRecognition: " + recognition.getText());
+//            logs.append("\nonRecognition: " + recognition.getText());
 
             //We have received a transcription of the users voice from the server.
         }
@@ -218,7 +216,7 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
                 //logs.append("\nonInterpretation: " + interpretation.getResult().toString(2));
                 intent = interpretation.getResult().getJSONArray("interpretations").getJSONObject(0).getJSONObject("action").getJSONObject("intent").optString("value");
                 literal = interpretation.getResult().getJSONArray("interpretations").getJSONObject(0).getString("literal");
-                logs.append("\n" + intent + "\n" + literal);
+//                logs.append("\n" + intent + "\n" + literal);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -281,7 +279,7 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
 
         @Override
         public void onSuccess(Transaction transaction, String s) {
-            logs.append("\nonSuccess");
+//            logs.append("\nonSuccess");
 
             //Notification of a successful transaction.
             setState(State.IDLE);
@@ -289,7 +287,7 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
 
         @Override
         public void onError(Transaction transaction, String s, TransactionException e) {
-            logs.append("\nonError: " + e.getMessage() + ". " + s);
+//            logs.append("\nonError: " + e.getMessage() + ". " + s);
 
             //Something went wrong. Check Configuration.java to ensure that your settings are correct.
             //The user could also be offline, so be sure to handle this case appropriately.
@@ -378,7 +376,7 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
         state = newState;
         switch (newState) {
             case IDLE:
-                toggleReco.setText(getResources().getString(R.string.recognize_with_service));
+                toggleReco.setText("What do you do?");
                 break;
             case LISTENING:
                 toggleReco.setText(getResources().getString(R.string.listening));
