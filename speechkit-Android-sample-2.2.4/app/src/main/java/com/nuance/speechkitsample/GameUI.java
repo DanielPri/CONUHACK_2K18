@@ -102,7 +102,7 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
         setState(State.IDLE);
         narratorText.setText("Welcome adventurer to the woods. You are in a forest, with climbable trees, a path set before you and you notice claw marks on a nearby tree\nWhat do you do?\n");
         yourLocation.setText("Location: Forest");
-        narrator.talk(narratorText.getText().toString());
+        //narrator.talk(narratorText.getText().toString());
     }
 
     // Another activity comes into the foreground. Let's release the server resources if in used.
