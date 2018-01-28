@@ -39,19 +39,23 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         LinearLayout mainContent = (LinearLayout) findViewById(R.id.main_content);
 
+        LinearLayout conu = inflateCategoryView("CONUHACKS 3", mainContent);
+
+        btn_speak = inflateRowView("Speak", "Cloud based ASR", conu);
+        btn2 = inflateRowView("2", "Cloud based ASR", conu);
+        btn3 = inflateRowView("3", "Cloud based ASR", conu);
+
 
         LinearLayout coreTech = inflateCategoryView("CORE TECHNOLOGIES", mainContent);
 
-
-        btn_speak = inflateRowView("Speak", "Cloud based ASR", coreTech);
-        btn2 = inflateRowView("2", "Cloud based ASR", coreTech);
-        btn3 = inflateRowView("3", "Cloud based ASR", coreTech);
 //        btn_listen = inflateRowView("Listen", "Cloud based ASR", coreTech);
 
-      asrButton = inflateRowView("Speech Recognition", "Cloud based ASR", coreTech);
-//        nluButton = inflateRowView("Speech and Natural Language", "Cloud based ASR with NLU", coreTech);
-//        textNluButton = inflateRowView("Text and Natural Language", "Cloud based NLU (text input)", coreTech);
-//        ttsButton = inflateRowView("Speech Synthesis", "Cloud based TTS", coreTech);
+        asrButton = inflateRowView("Speech Recognition", "Cloud based ASR", coreTech);
+        nluButton = inflateRowView("Speech and Natural Language", "Cloud based ASR with NLU", coreTech);
+        textNluButton = inflateRowView("Text and Natural Language", "Cloud based NLU (text input)", coreTech);
+        ttsButton = inflateRowView("Speech Synthesis", "Cloud based TTS", coreTech);
+
+
 
 //        LinearLayout utils = inflateCategoryView("UTILITIES", mainContent);
 //
@@ -122,10 +126,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.config:
-                onClick(configButton);
+                onClick(btn2);
                 return true;
             case R.id.about:
-                onClick(btn2);
+                onClick(btn3);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
