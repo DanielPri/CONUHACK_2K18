@@ -3,6 +3,8 @@ package com.nuance.speechkitsample;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,7 +26,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     View configButton = null;
     View aboutButton = null;
 
-    View btn_listen = null;
+//    View btn_listen = null;
     View btn_speak = null;
     View btn2 = null;
     View btn3 = null;
@@ -37,28 +39,32 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         LinearLayout mainContent = (LinearLayout) findViewById(R.id.main_content);
 
+        LinearLayout conu = inflateCategoryView("CONUHACKS 3", mainContent);
+
+        btn_speak = inflateRowView("Speak", "Cloud based ASR", conu);
+        btn2 = inflateRowView("2", "Cloud based ASR", conu);
+        btn3 = inflateRowView("3", "Cloud based ASR", conu);
+
 
         LinearLayout coreTech = inflateCategoryView("CORE TECHNOLOGIES", mainContent);
 
-
-        btn_speak = inflateRowView("Speak", "Cloud based ASR", coreTech);
-        btn2 = inflateRowView("2", "Cloud based ASR", coreTech);
-        btn3 = inflateRowView("3", "Cloud based ASR", coreTech);
 //        btn_listen = inflateRowView("Listen", "Cloud based ASR", coreTech);
 
-      asrButton = inflateRowView("Speech Recognition", "Cloud based ASR", coreTech);
-//        nluButton = inflateRowView("Speech and Natural Language", "Cloud based ASR with NLU", coreTech);
-//        textNluButton = inflateRowView("Text and Natural Language", "Cloud based NLU (text input)", coreTech);
-//        ttsButton = inflateRowView("Speech Synthesis", "Cloud based TTS", coreTech);
+        asrButton = inflateRowView("Speech Recognition", "Cloud based ASR", coreTech);
+        nluButton = inflateRowView("Speech and Natural Language", "Cloud based ASR with NLU", coreTech);
+        textNluButton = inflateRowView("Text and Natural Language", "Cloud based NLU (text input)", coreTech);
+        ttsButton = inflateRowView("Speech Synthesis", "Cloud based TTS", coreTech);
+
+
 
 //        LinearLayout utils = inflateCategoryView("UTILITIES", mainContent);
 //
 //        audioButton = inflateRowView("Audio Playback", "Loading and playing a resource", utils);
 
-        LinearLayout misc = inflateCategoryView("MISCELLANEOUS", mainContent);
+//        LinearLayout misc = inflateCategoryView("MISCELLANEOUS", mainContent);
 
-        configButton = inflateRowView("Configuration", "Host URL, App ID, etc", misc);
-        aboutButton = inflateRowView("About", "Learn more about SpeechKit", misc);
+//        configButton = inflateRowView("Configuration", "Host URL, App ID, etc", misc);
+//        aboutButton = inflateRowView("About", "Learn more about SpeechKit", misc);
 
     }
 
@@ -109,4 +115,25 @@ public class MainActivity extends Activity implements View.OnClickListener {
         v.setOnClickListener(this);
         return v;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.config:
+                onClick(btn2);
+                return true;
+            case R.id.about:
+                onClick(btn3);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }
