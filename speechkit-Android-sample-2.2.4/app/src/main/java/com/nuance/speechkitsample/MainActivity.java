@@ -28,6 +28,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 //    View btn_listen = null;
     View btn_speak = null;
+    View btn_startgame = null;
     View btn2 = null;
     View btn3 = null;
 
@@ -42,6 +43,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         LinearLayout conu = inflateCategoryView("CONUHACKS 3", mainContent);
 
         btn_speak = inflateRowView("Speak", "Cloud based ASR", conu);
+        btn_startgame = inflateRowView("Start Game", "Cloud based ASR with NLU", conu);
         btn2 = inflateRowView("2", "Cloud based ASR", conu);
         btn3 = inflateRowView("3", "Cloud based ASR", conu);
 
@@ -57,14 +59,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 
 
-//        LinearLayout utils = inflateCategoryView("UTILITIES", mainContent);
-//
-//        audioButton = inflateRowView("Audio Playback", "Loading and playing a resource", utils);
+        LinearLayout utils = inflateCategoryView("UTILITIES", mainContent);
 
-//        LinearLayout misc = inflateCategoryView("MISCELLANEOUS", mainContent);
+        audioButton = inflateRowView("Audio Playback", "Loading and playing a resource", utils);
 
-//        configButton = inflateRowView("Configuration", "Host URL, App ID, etc", misc);
-//        aboutButton = inflateRowView("About", "Learn more about SpeechKit", misc);
+        LinearLayout misc = inflateCategoryView("MISCELLANEOUS", mainContent);
+
+        configButton = inflateRowView("Configuration", "Host URL, App ID, etc", misc);
+        aboutButton = inflateRowView("About", "Learn more about SpeechKit", misc);
 
     }
 
@@ -86,13 +88,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }else if(v == btn_speak) {
             intent = new Intent(this,SLTActivity.class);
         }else if(v == btn2) {
-            intent = new Intent(this,Main2Activity.class);
+            intent = new Intent(this,MainMenu.class);
         }else if(v == btn3) {
             intent = new Intent(this,Main3Activity.class);
-        } else if(v == configButton) {
-            intent = new Intent(this, ConfigActivity.class);
-        } else if(v == aboutButton) {
-            intent = new Intent(this, AboutActivity.class);
+        } else if(v == btn_startgame) {
+            intent = new Intent(this, GameUI.class);
         }
 
         if(intent != null) {
