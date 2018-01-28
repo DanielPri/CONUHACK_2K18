@@ -24,23 +24,36 @@ public class MainActivity extends Activity implements View.OnClickListener {
     View configButton = null;
     View aboutButton = null;
 
+    View btn_listen = null;
+    View btn_speak = null;
+    View btn2 = null;
+    View btn3 = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         LinearLayout mainContent = (LinearLayout) findViewById(R.id.main_content);
+
 
         LinearLayout coreTech = inflateCategoryView("CORE TECHNOLOGIES", mainContent);
 
-        asrButton = inflateRowView("Speech Recognition", "Cloud based ASR", coreTech);
-        nluButton = inflateRowView("Speech and Natural Language", "Cloud based ASR with NLU", coreTech);
-        textNluButton = inflateRowView("Text and Natural Language", "Cloud based NLU (text input)", coreTech);
-        ttsButton = inflateRowView("Speech Synthesis", "Cloud based TTS", coreTech);
 
-        LinearLayout utils = inflateCategoryView("UTILITIES", mainContent);
+        btn_speak = inflateRowView("Speak", "Cloud based ASR", coreTech);
+        btn2 = inflateRowView("2", "Cloud based ASR", coreTech);
+        btn3 = inflateRowView("3", "Cloud based ASR", coreTech);
+//        btn_listen = inflateRowView("Listen", "Cloud based ASR", coreTech);
 
-        audioButton = inflateRowView("Audio Playback", "Loading and playing a resource", utils);
+      asrButton = inflateRowView("Speech Recognition", "Cloud based ASR", coreTech);
+//        nluButton = inflateRowView("Speech and Natural Language", "Cloud based ASR with NLU", coreTech);
+//        textNluButton = inflateRowView("Text and Natural Language", "Cloud based NLU (text input)", coreTech);
+//        ttsButton = inflateRowView("Speech Synthesis", "Cloud based TTS", coreTech);
+
+//        LinearLayout utils = inflateCategoryView("UTILITIES", mainContent);
+//
+//        audioButton = inflateRowView("Audio Playback", "Loading and playing a resource", utils);
 
         LinearLayout misc = inflateCategoryView("MISCELLANEOUS", mainContent);
 
@@ -67,6 +80,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
             intent = new Intent(this, ConfigActivity.class);
         } else if(v == aboutButton) {
             intent = new Intent(this, AboutActivity.class);
+        }else if(v == btn_speak) {
+            intent = new Intent(this,SLTActivity.class);
+        }else if(v == btn2) {
+            intent = new Intent(this,Main2Activity.class);
+        }else if(v == btn3) {
+            intent = new Intent(this,Main3Activity.class);
         }
 
         if(intent != null) {

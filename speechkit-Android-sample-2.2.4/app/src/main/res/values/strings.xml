@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">SpeechKit Sample</string>
-    <string name="app_version">SpeechKit SampleApp v2.2.4</string>
+    <string name="app_name">CONUHACKS 3</string>
+    <string name="app_version">SpeechKit Nuance API v2.2.4</string>
     <string name="sdk_version">SpeechKit SDK 2.2.4</string>
 
     <string name="title_activity_asr">Speech Recognition</string>
