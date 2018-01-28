@@ -35,7 +35,14 @@ public class CombatUI extends DetailActivity {
         new Thread(new Runnable() {
             public void run() {
                 while (progressStatus < 100) {
-                    progressStatus += 1;
+                    Button attack = (Button) findViewById(R.id.attack);
+                    attack.setOnClickListener(new View.OnClickListener() {
+
+                        public void onClick(View v) {
+                            progressStatus++;
+                        }
+                    });
+
                     // Update the progress bar and display the
                     //current value in the text view
                     handler.post(new Runnable() {
@@ -54,6 +61,7 @@ public class CombatUI extends DetailActivity {
             }
         }).start();
     }
+
 
 
 }
