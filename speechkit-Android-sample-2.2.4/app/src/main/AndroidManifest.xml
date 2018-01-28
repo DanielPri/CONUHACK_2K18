@@ -115,7 +115,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Main3Activity" />
+        <activity android:name=".CombatUI" />
         <activity android:name=".GameUI"></activity>
     </application>
 
