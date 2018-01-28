@@ -1,7 +1,7 @@
 # CONUHACK_2K18
 
 ### Description
-Android application
+Android application using Nuance's API.
 
 ### Contributors
 | Name      |Github |
