@@ -88,7 +88,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }else if(v == btn_speak) {
             intent = new Intent(this,SLTActivity.class);
         }else if(v == btn2) {
-            intent = new Intent(this,Main2Activity.class);
+            intent = new Intent(this,MainMenu.class);
         }else if(v == btn3) {
             intent = new Intent(this,Main3Activity.class);
         } else if(v == btn_startgame) {

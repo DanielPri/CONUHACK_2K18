@@ -49,7 +49,7 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
 
     private RadioGroup detectionType;
     private EditText nluContextTag;
-    private EditText language;
+//    private EditText language;
 
     private TextView logs;
     private Button clearLogs;
@@ -69,11 +69,11 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
         setContentView(R.layout.activity_game_ui);
 
         detectionType = (RadioGroup)findViewById(R.id.detection_type_picker );
-        nluContextTag = (EditText)findViewById(R.id.nlu_context_tag);
-        nluContextTag.setText(Configuration.CONTEXT_TAG);
-
-        language = (EditText)findViewById(R.id.language);
-        language.setText(Configuration.LANGUAGE_CODE);
+//        nluContextTag = (EditText)findViewById(R.id.nlu_context_tag);
+//        nluContextTag.setText(Configuration.CONTEXT_TAG);
+//
+//        language = (EditText)findViewById(R.id.language);
+//        language.setText(Configuration.LANGUAGE_CODE);
 
         logs = (TextView)findViewById(R.id.logs);
         clearLogs = (Button)findViewById(R.id.clear_logs);
@@ -145,14 +145,14 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
     private void recognize() {
         //Setup our Reco transaction options.
         Transaction.Options options = new Transaction.Options();
-        options.setDetection(resourceIDToDetectionType(detectionType.getCheckedRadioButtonId()));
-        options.setLanguage(new Language(language.getText().toString()));
+        options.setDetection(resourceIDToDetectionType(R.id.long_endpoint));
+        options.setLanguage(new Language("eng-USA"));
         options.setEarcons(startEarcon, stopEarcon, errorEarcon, null);
 
         //Add properties to appServerData for use with custom service. Leave empty for use with NLU.
         JSONObject appServerData = new JSONObject();
         //Start listening
-        recoTransaction = speechSession.recognizeWithService(nluContextTag.getText().toString(), appServerData, options, recoListener);
+        recoTransaction = speechSession.recognizeWithService("M10253_A3221", appServerData, options, recoListener);
     }
 
     private Transaction.Listener recoListener = new Transaction.Listener() {
@@ -200,6 +200,9 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
         public void onInterpretation(Transaction transaction, Interpretation interpretation) {
             try {
                 logs.append("\nonInterpretation: " + interpretation.getResult().toString(2));
+                String intent = interpretation.getResult().getJSONArray("interpretations").getJSONObject(0).getJSONObject("action").getJSONObject("intent").optString("value");
+
+                logs.append(intent);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
