@@ -109,5 +109,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="58dp" />
 
+    <TextView
+        android:id="@+id/yourLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/clear_logs"
+        android:layout_alignRight="@+id/clear_logs"
+        android:layout_alignTop="@+id/narratorBox"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
+        android:text="Your Location" />
+
 
 </RelativeLayout>

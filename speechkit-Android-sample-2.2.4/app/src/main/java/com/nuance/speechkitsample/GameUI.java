@@ -54,6 +54,7 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
     private TextView logs;
     private TextView narratorText;
     private TextView replyBox;
+    private TextView yourLocation;
     private Button clearLogs;
 
     private Button toggleReco;
@@ -88,6 +89,7 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
 
         narratorText = (TextView)findViewById(R.id.narratorBox);
         replyBox  = (TextView)findViewById(R.id.replyBox);
+        yourLocation = (TextView)findViewById(R.id.yourLocation);
 
         volumeBar = (ProgressBar)findViewById(R.id.volume_bar);
 
@@ -98,6 +100,7 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
 
         setState(State.IDLE);
         narratorText.setText("Welcome adventurer to the woods. You are in a forest, with climbable trees, a path set before you and you notice claw marks on a nearby tree\nWhat do you do?\n");
+        yourLocation.setText("Location: Forest");
     }
 
     // Another activity comes into the foreground. Let's release the server resources if in used.
@@ -230,9 +233,13 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
                     if(intent.equals("climbTreeUp")){
                         narratorText.setText("You climb up the tree");
                         current = finiteState.TREE_TOP;
+                        yourLocation.setText("Location: Tree-Top");
                     }
                     else if(intent.equals("examineClaws")){
                         narratorText.setText("You examine the claws");
+                    }
+                    else if(intent.equals("lookAtTree")){
+                        narratorText.setText("What tree do you look at???");
                     }
                     else if(intent.equals("goPath")){
                         narratorText.setText("You go down the path");
@@ -249,6 +256,7 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
                     else if(intent.equals("climbTreeDown")){
                         narratorText.setText("You go back down.");
                         current = finiteState.FOREST;
+                        yourLocation.setText("Location: Forest");
                     }
                     else {
                         narratorText.setText("What are you saying dumbo");
