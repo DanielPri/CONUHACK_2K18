@@ -1,5 +1,6 @@
 package com.nuance.speechkitsample;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +28,7 @@ import com.nuance.speechkit.TransactionException;
  *
  * Copyright (c) 2015 Nuance Communications. All rights reserved.
  */
-public class TTSCall extends DetailActivity implements AudioPlayer.Listener {
+public class TTSCall{
 
     private String ttsText;
 
@@ -35,14 +36,11 @@ public class TTSCall extends DetailActivity implements AudioPlayer.Listener {
     private Transaction ttsTransaction;
     private State state = State.IDLE;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tts);
+    public TTSCall(AudioActivity activity) {
 
         //Create a session
-        speechSession = Session.Factory.session(this, Configuration.SERVER_URI, Configuration.APP_KEY);
-        speechSession.getAudioPlayer().setListener(this);
+        speechSession = Session.Factory.session(activity, Configuration.SERVER_URI, Configuration.APP_KEY);
+        speechSession.getAudioPlayer().setListener(activity);
 
         setState(State.IDLE);
     }
@@ -125,8 +123,7 @@ public class TTSCall extends DetailActivity implements AudioPlayer.Listener {
         ttsTransaction.cancel();
     }
 
-    @Override
-    public void onBeginPlaying(AudioPlayer audioPlayer, Audio audio) {
+    public void onBeginPlaying() {
 
 
         //The TTS Audio will begin playing.
@@ -134,8 +131,7 @@ public class TTSCall extends DetailActivity implements AudioPlayer.Listener {
         setState(State.PLAYING);
     }
 
-    @Override
-    public void onFinishedPlaying(AudioPlayer audioPlayer, Audio audio) {
+    public void onFinishedPlaying() {
 
 
         //The TTS Audio has finished playing

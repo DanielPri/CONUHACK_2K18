@@ -10,6 +10,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.nuance.speechkit.Audio;
+import com.nuance.speechkit.AudioPlayer;
 import com.nuance.speechkit.DetectionType;
 import com.nuance.speechkit.Interpretation;
 import com.nuance.speechkit.Language;
@@ -20,8 +21,7 @@ import com.nuance.speechkit.TransactionException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-
+import com.nuance.speechkitsample.TTSCall;
 
 /**
  * This Activity is built to demonstrate how to perform NLU (Natural Language Understanding).
@@ -41,7 +41,7 @@ import org.json.JSONObject;
  *
  * Copyright (c) 2015 Nuance Communications. All rights reserved.
  */
-public class GameUI extends DetailActivity implements View.OnClickListener {
+public class GameUI extends AudioActivity implements View.OnClickListener {
 
     private Audio startEarcon;
     private Audio stopEarcon;
@@ -68,11 +68,14 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
 
     private String literal = "";
     private String intent = "";
+    private TTSCall ttsCall;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_ui);
-        TTSCall narrator = new TTSCall();
+
+        ttsCall = new TTSCall(this);
 
         detectionType = (RadioGroup)findViewById(R.id.detection_type_picker );
 //        nluContextTag = (EditText)findViewById(R.id.nlu_context_tag);
@@ -102,7 +105,7 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
         setState(State.IDLE);
         narratorText.setText("Welcome adventurer to the woods. You are in a forest, with climbable trees, a path set before you and you notice claw marks on a nearby tree\nWhat do you do?\n");
         yourLocation.setText("Location: Forest");
-        //narrator.talk(narratorText.getText().toString());
+        ttsCall.talk(narratorText.getText().toString());
     }
 
     // Another activity comes into the foreground. Let's release the server resources if in used.
@@ -236,32 +239,40 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
                         narratorText.setText("You climb up the tree");
                         current = finiteState.TREE_TOP;
                         yourLocation.setText("Location: Tree-Top");
+                        ttsCall.talk(narratorText.getText().toString());
                     }
                     else if(intent.equals("examineClaws")){
                         narratorText.setText("You examine the claws");
+                        ttsCall.talk(narratorText.getText().toString());
                     }
                     else if(intent.equals("lookAtTree")){
                         narratorText.setText("What tree do you look at???");
+                        ttsCall.talk(narratorText.getText().toString());
                     }
                     else if(intent.equals("goPath")){
                         narratorText.setText("You go down the path");
+                        ttsCall.talk(narratorText.getText().toString());
                     }
                     else {
-                        narratorText.setText("What are you saying dumbo");
+                        narratorText.setText("What are you saying dummy");
+                        ttsCall.talk(narratorText.getText().toString());
                     }
 
                     break;
                 case TREE_TOP:
                     if(intent.equals("jumpFromTree")){
                         narratorText.setText("You cannot jump from this height, you fool!");
+                        ttsCall.talk(narratorText.getText().toString());
                     }
                     else if(intent.equals("climbTreeDown")){
                         narratorText.setText("You go back down.");
                         current = finiteState.FOREST;
                         yourLocation.setText("Location: Forest");
+                        ttsCall.talk(narratorText.getText().toString());
                     }
                     else {
                         narratorText.setText("What are you saying dumbo");
+                        ttsCall.talk(narratorText.getText().toString());
                     }
                     break;
             }
@@ -335,6 +346,20 @@ public class GameUI extends DetailActivity implements View.OnClickListener {
 
 
     /* State Logic: IDLE -> LISTENING -> PROCESSING -> repeat */
+
+    @Override
+    public void onBeginPlaying(AudioPlayer audioPlayer, Audio audio) {
+        super.onBeginPlaying(audioPlayer, audio);
+
+        ttsCall.onBeginPlaying();
+    }
+
+    @Override
+    public void onFinishedPlaying(AudioPlayer audioPlayer, Audio audio) {
+        super.onFinishedPlaying(audioPlayer, audio);
+
+        ttsCall.onFinishedPlaying();
+    }
 
     private enum State {
         IDLE,
