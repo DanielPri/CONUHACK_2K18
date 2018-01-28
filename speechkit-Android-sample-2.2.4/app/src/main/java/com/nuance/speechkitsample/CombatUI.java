@@ -36,7 +36,8 @@ public class CombatUI extends DetailActivity {
             public void run() {
                 while (progressStatus < 100) {
                     Button attack = (Button) findViewById(R.id.attack);
-                    if(progressStatus <= 100){
+
+                    if(progressStatus > 0){
                         progressStatus--;
                     }
 
