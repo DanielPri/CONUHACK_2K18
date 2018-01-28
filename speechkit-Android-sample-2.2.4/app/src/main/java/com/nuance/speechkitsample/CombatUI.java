@@ -44,9 +44,7 @@ public class CombatUI extends DetailActivity {
 
                         public void onClick(View v) {
                             progressStatus+=20;
-                            if(progressStatus > 100){
-                                progressStatus = 100;
-                            }
+
                         }
                     });
 
@@ -64,6 +62,10 @@ public class CombatUI extends DetailActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                }
+                if(progressStatus > 100){
+                    progressStatus = 100;
+                    progressBar.setProgress(progressStatus);
                 }
             }
         }).start();
