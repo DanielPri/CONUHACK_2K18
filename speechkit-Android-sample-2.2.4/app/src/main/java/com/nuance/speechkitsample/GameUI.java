@@ -59,6 +59,8 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
     private TextView yourLocation;
 //    private Button clearLogs;
 
+    private ImageView image1;
+
     private Button toggleReco;
 
     private ProgressBar volumeBar;
@@ -77,7 +79,7 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_ui);
 
-        ImageView img = (ImageView) findViewById(R.id.imageView);
+        image1 = (ImageView) findViewById(R.id.imageView);
 
 
         ttsCall = new TTSCall(this);
@@ -113,6 +115,8 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
                 "tree, and nearby grows a tree that seems easy to climb. Down the center, a path goes deeper into the woods.\nWhat do you do?\n");
         yourLocation.setText("Location: Forest");
         ttsCall.talk(narratorText.getText().toString());
+
+        image1.setImageResource(R.drawable.img_forest);
     }
 
     // Another activity comes into the foreground. Let's release the server resources if in used.
@@ -141,6 +145,7 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
     public void onClick(View v) {
         if(v == toggleReco) {
             toggleReco();
+
         }
     }
 
@@ -245,11 +250,13 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
                                 "You hear a howl further into the woods.\nWhat do you do?");
                         current = finiteState.TREE_TOP;
                         yourLocation.setText("Location: Tree-Top");
+                        image1.setImageResource(R.drawable.img_topoftree1);
                         ttsCall.talk(narratorText.getText().toString());
                     }
                     else if(intent.equals("examineClaws")){
                         narratorText.setText("You examine the claw marks. They are large and cut deeply into the woods " +
                                 "Clearly caused by a monster of some sort.");
+
                         ttsCall.talk(narratorText.getText().toString());
                     }
                     else if(intent.equals("lookAtTree")){
@@ -261,6 +268,7 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
                                 " and a large hole in a tree, at about chest height.\nWhat do you do?");
                         current = finiteState.FOREST_DEEPER;
                         yourLocation.setText("Location: Deep Forest");
+                        image1.setImageResource(R.drawable.img_forest2);
                         ttsCall.talk(narratorText.getText().toString());
                     }
                     else {
@@ -278,6 +286,7 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
                         narratorText.setText("You go back down. You are now once again in the forest.\nWhat do you do?");
                         current = finiteState.FOREST;
                         yourLocation.setText("Location: Forest");
+                        image1.setImageResource(R.drawable.img_forest);
                         ttsCall.talk(narratorText.getText().toString());
                     }
                     else {
@@ -291,6 +300,7 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
                                 " the footprints are both human and animal.");
                         current = finiteState.FOREST_FINAL;
                         yourLocation.setText("Location: Complete Wilderness");
+                        image1.setImageResource(R.drawable.img_forest3);
                         ttsCall.talk(narratorText.getText().toString());
                     }
                     else if(intent.equals("holeInTree")){
