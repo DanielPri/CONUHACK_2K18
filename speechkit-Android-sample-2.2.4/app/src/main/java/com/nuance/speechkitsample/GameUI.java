@@ -256,7 +256,6 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
                     else if(intent.equals("examineClaws")){
                         narratorText.setText("You examine the claw marks. They are large and cut deeply into the woods " +
                                 "Clearly caused by a monster of some sort.");
-
                         ttsCall.talk(narratorText.getText().toString());
                     }
                     else if(intent.equals("lookAtTree")){
