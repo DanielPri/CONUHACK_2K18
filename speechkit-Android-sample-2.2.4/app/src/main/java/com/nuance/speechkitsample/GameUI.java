@@ -432,7 +432,7 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
         state = newState;
         switch (newState) {
             case IDLE:
-                toggleReco.setText("What do you do?");
+                toggleReco.setText("Tap to speak.");
                 break;
             case LISTENING:
                 toggleReco.setText(getResources().getString(R.string.listening));
