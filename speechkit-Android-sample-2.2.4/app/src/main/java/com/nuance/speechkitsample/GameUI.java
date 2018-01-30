@@ -301,6 +301,7 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
                         narratorText.setText("You either cannot do that, or I do not understand you.");
                         ttsCall.talk(narratorText.getText().toString());
                     }
+                    break;
                 case FOREST_FINAL:
                     if(intent.equals("examineBones")){
                         narratorText.setText("The bones seem fresh and licked clean.");
@@ -320,6 +321,7 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
                         narratorText.setText("You either cannot do that, or I do not understand you.");
                         ttsCall.talk(narratorText.getText().toString());
                     }
+                    break;
             }
 
         }
