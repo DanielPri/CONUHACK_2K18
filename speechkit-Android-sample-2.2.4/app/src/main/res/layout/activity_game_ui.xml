@@ -17,26 +17,29 @@
             android:id="@+id/narratorBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Game Interface"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="30dp"/>
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="31dp"
+            android:gravity="center"
+            android:text="Game Interface" />
 
         <TextView
             android:id="@+id/replyBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="170dp"
-            android:layout_marginLeft="30dp"
-            />
+            android:layout_below="@+id/narratorBox"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="119dp" />
 
 
         <TextView
             android:id="@+id/yourLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:layout_marginTop="220dp"
-            android:layout_marginLeft="30dp"
+            android:layout_below="@+id/replyBox"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="33dp"
             android:text="Your Location" />
 
 
