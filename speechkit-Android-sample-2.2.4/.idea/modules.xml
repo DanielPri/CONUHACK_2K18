@@ -4,8 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\Users\songt\Desktop\CONUHACK_2K18\speechkit-Android-sample-2.2.4\app\app.iml" filepath="C:\Users\songt\Desktop\CONUHACK_2K18\speechkit-Android-sample-2.2.4\app\app.iml" />
+      <module fileurl="file://E:\Projects\Android\Conuhacks3\CONUHACK_2K18\speechkit-Android-sample-2.2.4\app\app.iml" filepath="E:\Projects\Android\Conuhacks3\CONUHACK_2K18\speechkit-Android-sample-2.2.4\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/speechkit-Android-sample-2.2.4.iml" filepath="$PROJECT_DIR$/speechkit-Android-sample-2.2.4.iml" />
       <module fileurl="file://C:\Users\songt\Desktop\CONUHACK_2K18\speechkit-Android-sample-2.2.4\speechkit-Android-sample-2.2.4.iml" filepath="C:\Users\songt\Desktop\CONUHACK_2K18\speechkit-Android-sample-2.2.4\speechkit-Android-sample-2.2.4.iml" />
+      <module fileurl="file://E:\Projects\Android\Conuhacks3\CONUHACK_2K18\speechkit-Android-sample-2.2.4\speechkit-Android-sample-2.2.4.iml" filepath="E:\Projects\Android\Conuhacks3\CONUHACK_2K18\speechkit-Android-sample-2.2.4\speechkit-Android-sample-2.2.4.iml" />
     </modules>
   </component>
 </project>
