@@ -110,7 +110,7 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
         loadEarcons();
 
         setState(State.IDLE);
-        narratorText.setText("Welcome adventurer. You are tasked with taking down the Werewolf that was terrorizing our village." +
+        narratorText.setText("Welcome adventurer. You are tasked with taking down the Werewolf that was terrorizing our village. " +
                 "He was last seen going into the woods...\nAs you enter the forest, you notice claw marks on a " +
                 "tree, and nearby grows a tree that seems easy to climb. Down the center, a path goes deeper into the woods.\nWhat do you do?\n");
         yourLocation.setText("Location: Forest");
@@ -268,6 +268,10 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
                         current = finiteState.FOREST_DEEPER;
                         yourLocation.setText("Location: Deep Forest");
                         image1.setImageResource(R.drawable.img_forest2);
+                        ttsCall.talk(narratorText.getText().toString());
+                    }
+                    else if(intent.equals("runAway")){
+                        narratorText.setText("You are not a coward! You will not turn your back!");
                         ttsCall.talk(narratorText.getText().toString());
                     }
                     else {
