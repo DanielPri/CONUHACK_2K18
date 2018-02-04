@@ -18,12 +18,13 @@ public class CombatUI extends DetailActivity {
     private TextView textView;
     private Handler handler = new Handler();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_combat);
 
-        Button attack = (Button) findViewById(R.id.attack);
+//        Button attack = (Button) findViewById(R.id.attack);
 
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -38,13 +39,13 @@ public class CombatUI extends DetailActivity {
                     Button attack = (Button) findViewById(R.id.attack);
 
                     if(progressStatus > 0){
-                        progressStatus--;
+                        progressStatus-=5;
                     }
 
                     attack.setOnClickListener(new View.OnClickListener() {
 
                         public void onClick(View v) {
-                            progressStatus+=20;
+                            progressStatus+=10;
 
                         }
                     });
@@ -59,19 +60,18 @@ public class CombatUI extends DetailActivity {
                     });
                     try {
                         // Sleep for 200 milliseconds.
-                        Thread.sleep(200);
+                        Thread.sleep(100);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                if(progressStatus > 100){
+                if(progressStatus >= 100){
                     progressStatus = 100;
                     progressBar.setProgress(progressStatus);
+
                 }
             }
         }).start();
     }
-
-
 
 }

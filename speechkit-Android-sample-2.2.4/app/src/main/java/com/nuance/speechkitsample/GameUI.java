@@ -1,5 +1,6 @@
 package com.nuance.speechkitsample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -110,6 +111,7 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
         loadEarcons();
 
         setState(State.IDLE);
+//        narratorText.setText("debug");
         narratorText.setText("Welcome adventurer. You are tasked with taking down the Werewolf that was terrorizing our village. " +
                 "He was last seen going into the woods...\nAs you enter the forest, you notice claw marks on a " +
                 "tree, and nearby grows a tree that seems easy to climb. Down the center, a path goes deeper into the woods.\nWhat do you do?\n");
@@ -241,6 +243,10 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
         }
 
         //manages the state
+        /*-----------------------------------State Machine---------------------------------------------------
+        Following Switch case is
+
+         */
         private void manageState(){
             switch (current) {
                 case FOREST:
@@ -325,10 +331,20 @@ public class GameUI extends AudioActivity implements View.OnClickListener {
                         ttsCall.talk(narratorText.getText().toString());
                     }
                     else if(intent.equals("goPath") && current == finiteState.FOREST_FINAL){
-                        narratorText.setText("You encounter the werewolf. In an extremely anticlimatic battle, you win.");
+                        narratorText.setText("You encounter the werewolf.");
                         current = finiteState.VICTORY;
                         yourLocation.setText("Location: VICTORY");
                         ttsCall.talk(narratorText.getText().toString());
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                Intent i=new Intent(GameUI.this,CombatUI.class);
+                                startActivity(i);
+                            }
+                        }, 5000);
+
                     }
                     else {
                         narratorText.setText("You either cannot do that, or I do not understand you.");
